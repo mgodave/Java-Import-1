@@ -28,7 +28,9 @@ EOC
   
 my $build = $class->new
  ( module_name => 'Java::Import',
-   dist_version => '0.01',
+   dist_version => '0.02',
+   dist_abstract => 'Perl library for calling Java from Perl',
+   dist_author => 'David Rusek <rusekd@cpan.org>',
    license => 'perl',
    requires => { 'GCJ::Cni' => 0 },
    #PL_files => { 'lib/Java/Wrapper.pm.PL' => [ 'lib/Java/Wrapper.pm', 'lib/Java/Wrapper.xs' ] },
@@ -38,7 +40,7 @@ my $build = $class->new
    java_source => 'src',
    extra_compiler_flags => [ '-x', 'c++', '-include', 'gcj/cni.h' ],
    extra_linker_flags => [ 'src/java.o', '-lgcj', '-lstdc++' ],
-   create_makefile_pl => 'passthrough',
+   create_makefile_pl => 'passthrough'
  );
 
 

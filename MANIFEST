@@ -1,6 +1,4 @@
 Build.PL
-examples/beantohash/SomeBean.java
-examples/beantohash/test.pl
 examples/rmi/client.pl
 examples/rmi/README
 examples/rmi/RemoteInterface.java
@@ -8,9 +6,6 @@ examples/rmi/RemoteObject.java
 examples/rmi/Server.java
 examples/rmi/SomeBean.java
 examples/rmi/startserver.sh
-examples/tiejavahash/SomeBean.java
-examples/tiejavahash/test.pl
-examples/tiejavahash/TieJavaBean.pm
 lib/Java/ClassProxy.pm
 lib/Java/Design.pod
 lib/Java/Examples.pod
@@ -19,7 +14,6 @@ lib/Java/TieJavaArray.pm
 lib/Java/Wrapper.i
 lib/Java/Wrapper.pm
 lib/Java/Wrapper.xs
-Makefile.PL
 MANIFEST			This list of files
 META.yml
 src/ArgumentArray.java
@@ -31,3 +25,4 @@ t/exceptions.t
 t/import.t
 t/primitives.t
 t/static.t
+Makefile.PL

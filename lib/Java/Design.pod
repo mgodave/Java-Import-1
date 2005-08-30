@@ -1,3 +1,7 @@
+=head1 NAME
+
+Java::Import::Design - The design of the Java::Import Module
+
 =head1 MOTIVATIONS
 
 The original motivation for writing this module came out of a project I was working on during my previous employment.

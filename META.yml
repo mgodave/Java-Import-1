@@ -1,27 +1,8 @@
----
+--- #YAML:1.0
 name: Java-Import
-version: 0.01
-author: ~
-abstract: ~
+version: 0.02
+author:
+  - David Rusek <rusekd@cpan.org>
+abstract: Perl library for calling Java from Perl
 license: perl
-requires:
-  GCJ::Cni: 0
-dynamic_config: 1
-provides:
-  Java::Import:
-    file: lib/Java/Import.pm
-  Java::Import::ClassProxy:
-    file: lib/Java/ClassProxy.pm
-  Java::Import::TieJavaArray:
-    file: lib/Java/TieJavaArray.pm
-  Java::Wrapper:
-    file: lib/Java/Wrapper.pm
-  Java::Wrapper::ArgumentArray:
-    file: lib/Java/Wrapper.pm
-  Java::Wrapper::ArrayWrapper:
-    file: lib/Java/Wrapper.pm
-  Java::Wrapper::ObjectWrapper:
-    file: lib/Java/Wrapper.pm
-  Java::Wrapperc:
-    file: lib/Java/Wrapper.pm
-generated_by: Module::Build version 0.2611
+generated_by: Module::Build version 0.2611, without YAML.pm

@@ -125,9 +125,6 @@ public class ObjectWrapper {
 		try {
 			Method thisMethod = wrappedObject.getClass().getMethod(methodName, argClasses);
 			Object returnValue = thisMethod.invoke(wrappedObject, args);
-			if ( returnValue == null ) {
-				return null;
-			}
 			if ( returnValue.getClass().isArray() ) {
 				return new ArrayWrapper(returnValue);
 			}
@@ -173,9 +170,6 @@ public class ObjectWrapper {
                 try {
                         Method thisMethod = Class.forName(className).getMethod(staticMethodName, argClasses);
 			Object returnValue = thisMethod.invoke(null, args);
-			if ( returnValue == null ) {
-				return null;
-			}
 			if ( returnValue.getClass().isArray() ) {
 				return new ArrayWrapper(returnValue);
 			}

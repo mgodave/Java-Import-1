@@ -28,9 +28,7 @@ sub _get_argument_list {
 sub _wrap_return_value {
 	#print "***_WRAP_RETURN_VALUE***\n";
 	my $input = shift;
-	if ( not defined $input ) {
-		return undef;
-	}
+	#XXX void return types from class compiled Java cause an error
 	if ( $input->isArray() ) {
 		#print "***IS ARRAY***\n";
 		my @tiedarray;

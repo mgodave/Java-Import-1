@@ -135,7 +135,7 @@ The purpose of this module is to provide a simple method for using Java classes 
 
 =head1 CALLING JAVA CLASSES FROM PERL
 
-The main goal of this module is to make it very easy and transparent to call Java classes from Perl.  This is handled through the use of the Java Reflection API, directly.  This is done through the use of the GCJ CNI interface.
+The main goal of this module is to make it very easy and transparent to call Java classes from Perl.  This is handled through the use of the Java Reflection API, directly.  This is done through the use of the GCJ::Cni(3) interface.
 
 =head2 Importing Java Classes
 
@@ -149,7 +149,7 @@ This simply sets up a namespace corresposding to the requested Java class and fa
 
 =head2 Constructing Class Instances
 
-Once a Java class has been 'imported' it can be instantiated with the new operator/method.
+Once a Java class has been 'imported' and it's namespace has been setup it can be instantiated with the new operator/method.
 
    use Java::Import qw(
       java.lang.StringBuffer
@@ -184,7 +184,7 @@ Static methods are handled as part of the namespace setup by the use statement a
 
 =head2 Handling Return Values
 
-All values returned from a Java method are themselves Java classes.  This means that even primitive Java types are treated as Java objects this is done by wrapping them in their equivilant "java.lang" object.  For instance, a return type of Java 'int' will be returned to Perl as type "java.lang.Integer".
+All values returned from a Java method are themselves Java classes.  This means that even primitive Java types are treated as Java objects this is done by wrapping them in their equivilant "java.lang" object.  The only exception to this rule is Strings.  For instance, a return type of Java 'int' will be returned to Perl as type "java.lang.Integer".  To convert a Primitive type to a Perl type you may access it as a string.
 
 =head2 Handling Method Arguments
 
@@ -201,26 +201,24 @@ When a Java Method returns an array of objects, it is automatically tied to a Pe
    my $array_ref = some::package::SomeClass::giveMeAnArray();
    foreach my $obj ( @$array_ref ) {
       $obj->someMethod();
-}
+   }
 
 
 =head2 Dealing with Primitive Types
 
 To use primitive types in Java Method calls they must first be wrapped in their Object equivilant.  The following functions are made available through the Java::Import namespace for this purpose.
 
-   wrapInt
-   wrapBoolean
-   wrapShort
-   wrapLong
-   wrapChar
-   wrapByte
-   wrapFloat
-   wrapDouble
-   wrapString
+   jint
+   jboolean
+   jshort
+   jlong
+   jchar
+   jbyte
+   jfloat
+   jdouble
+   jstring
 
-=head2 Dealing with Fields
-
-Fields are not yet supported
+These functions are not exported by default and must be accessed through the Java::Import namespace.
 
 =head2 Exception Handling
 
@@ -247,7 +245,7 @@ Note that the $@ variable holds an instance of the Exception thrown.  Even thoug
 
 =head2 isa
 
-You can ask inheritance questions of Java Objects through the isa method.  This is mostly useful when handling Exceptions.
+You can ask questions about an object's inheritence hierarchy through the isa method.  This is mostly useful when handling Exceptions.
 
    use Java::Import qw(
       java.lang.Class
@@ -272,7 +270,7 @@ You can ask inheritance questions of Java Objects through the isa method.  This 
 
 =head2 can
 
-You can also ask a Java Object whether it has the capability to perform a certain action.
+You can also ask a Java Object whether it has the capability to perform a certain action through the can method.
 
    use Java::Import qw(
       java.lang.StringBuffer
@@ -286,7 +284,7 @@ You can also ask a Java Object whether it has the capability to perform a certai
 
 =head2 Converting Java Objects to Strings
 
-When using a Java Object in a String Context the toString method will automatically be invoked.  So, the following piece of code will have the desired result:
+When using a Java Object in a String Context the toString method will automatically be invoked therefore the following piece of code will have the desired result:
 
    use Java::Import qw(
       java.lang.StringBuffer
@@ -325,18 +323,21 @@ Very simply, add the appropriate Java Class to the ISA array.
 
 At the moment you cannot use this inherited class as a replacement for StringBuffer in other Java Calls.  In addition, Inheriting from Abstract classes and Interfaces will not currently work.  These features are something I hope to see in the future.
 
-=head1 LIMITATIONS
-
-
-
 =head1 TODO
 
-Add Support for Java Fields
-Shore-up how primitive types are handled and converted between Java and Perl.
+- Add Support for Java Fields.
+
+- Inheritence does not work as expected.
+
+- Allow inherited classes to be passed as Java Objects.
 
 =head1 REQUIREMENTS
 
-This module requires gcc-java >= 4.0 to build and run.
+This module requires gcc-java >= 4.0 to build and run. A patch for 3.x is in the works.
+
+=head1 ACKNOWLEDGEMENTS
+
+A special thanks to Google and the Perl Foundation for sponsoring this project through their first ever Summer of Code Program.
 
 =head1 AUTHOR
 
