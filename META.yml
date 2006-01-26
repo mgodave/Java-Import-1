@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Java-Import
-version: 0.02
+version: 0.03
 author:
   - David Rusek <rusekd@cpan.org>
 abstract: Perl library for calling Java from Perl

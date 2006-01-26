@@ -28,7 +28,7 @@ EOC
   
 my $build = $class->new
  ( module_name => 'Java::Import',
-   dist_version => '0.02',
+   dist_version => '0.03',
    dist_abstract => 'Perl library for calling Java from Perl',
    dist_author => 'David Rusek <rusekd@cpan.org>',
    license => 'perl',

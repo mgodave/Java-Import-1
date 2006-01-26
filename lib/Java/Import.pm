@@ -1,7 +1,7 @@
 use GCJ::Cni;
 use Java::Wrapper;
 use Java::ClassProxy;
-use threads;
+#use threads;
 
 package Java::Import;
 require Exporter;
@@ -10,7 +10,7 @@ require Exporter;
 @EXPORT = qw(jstring);
 
 our $vm_initted = 0;
-our %threads;
+#our %threads;
 
 sub import {
 	my $package = shift;
@@ -18,10 +18,11 @@ sub import {
 	map make_namespace($_), @classes;
 
 	{ 
-		lock $vm_initted;
+		#lock $vm_initted;
 		if ( not $vm_initted ) {
 			GCJ::Cni::JvCreateJavaVM(undef);
-			my $thread = GCJ::Cni::JvAttachCurrentThread("PERLTHREAD:" . threads->tid(), undef);
+			#my $thread = GCJ::Cni::JvAttachCurrentThread("PERLTHREAD:" . threads->tid(), undef);
+			my $thread = GCJ::Cni::JvAttachCurrentThread("PERLTHREAD:", undef);
 			$vm_initted = 1;
 		}
 	}
