@@ -13,7 +13,7 @@ public class ArgumentArray {
 		array[index++] = element;
 	}
 
-	public Iterator getIterator (  ) {
+	public ArgumentArrayIterator getIterator (  ) {
 		return new ArgumentArrayIterator();
 	}
 
@@ -21,7 +21,7 @@ public class ArgumentArray {
 		return array.length;
 	}
 
-	class ArgumentArrayIterator implements Iterator {
+	class ArgumentArrayIterator implements Iterator<Object> {
 
 		int curIndex = 0;
 		
