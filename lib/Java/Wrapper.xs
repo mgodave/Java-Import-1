@@ -876,7 +876,7 @@ SWIG_Perl_SetErrorf(const char *fmt, ...) {
 /* #define SWIG_croakf(x...) { SWIG_SetErrorf(x); goto fail; } */
 
 
-typedef XS(SwigPerlWrapper);
+typedef XSPROTO(SwigPerlWrapper);
 typedef SwigPerlWrapper *SwigPerlWrapperPtr;
 
 /* Structure for command table */

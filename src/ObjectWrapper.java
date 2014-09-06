@@ -11,7 +11,7 @@ public class ObjectWrapper {
 	protected InvocationTargetException lastThrownException = null;
 	protected boolean primitive = false;
 
-	protected static HashMap staticExceptions = new HashMap();
+	protected static HashMap<Object,Object> staticExceptions = new HashMap<Object,Object>();
 
 	protected ObjectWrapper() {
 	}
@@ -32,9 +32,9 @@ public class ObjectWrapper {
 		return wrappedObject;
 	}
 
-	protected Class getObjectType (  ) {
+	protected Class<?> getObjectType (  ) {
 		if ( primitive ) {
-			return (Class) this.getField("TYPE").getWrappedObject();
+			return (Class<?>) this.getField("TYPE").getWrappedObject();
 		} else {
 			return wrappedObject.getClass();
 		}
@@ -97,9 +97,9 @@ public class ObjectWrapper {
 		return wrappedObject.toString();
 	}
 
-	private static void getArguments ( ArgumentArray wrapped, Class[] types, Object[] values ) {
+	private static void getArguments ( ArgumentArray wrapped, Class<?>[] types, Object[] values ) {
 		if ( wrapped != null ) {
-			Iterator itr = wrapped.getIterator();
+			Iterator<Object> itr = wrapped.getIterator();
 			ObjectWrapper curr = null;
 			//int i = 0;
 			for ( int i = 0; itr.hasNext(); i++ ) {
@@ -114,7 +114,7 @@ public class ObjectWrapper {
 	}
 
 	public ObjectWrapper invokeMethod ( String methodName, ArgumentArray inputArgs ) {
-		Class[] argClasses = null;
+		Class<?>[] argClasses = null;
 		Object[] args = null;
 		if ( inputArgs != null ) {
 			argClasses = new Class[inputArgs.getSize()];
@@ -159,7 +159,7 @@ public class ObjectWrapper {
 	}
 
 	public static ObjectWrapper invokeStaticMethod ( String className, String staticMethodName, ArgumentArray inputArgs ) {
-		Class[] argClasses = null;
+		Class<?>[] argClasses = null;
                 Object[] args = null;
 		if ( inputArgs != null ) {
                         argClasses = new Class[inputArgs.getSize()];
@@ -184,7 +184,7 @@ public class ObjectWrapper {
 	}
 
 	public static ObjectWrapper newClassInstance ( String javaClassName, ArgumentArray inputArgs ) {
-		Class[] argClasses = null;
+		Class<?>[] argClasses = null;
                 Object[] args = null;
 		if ( inputArgs != null ) {
                         argClasses = new Class[inputArgs.getSize()];
@@ -193,8 +193,8 @@ public class ObjectWrapper {
 		getArguments(inputArgs, argClasses, args);
 
 		try {
-			Class thisClass = Class.forName(javaClassName);
-			Constructor thisConstructor = thisClass.getConstructor(argClasses);
+			Class<?> thisClass = Class.forName(javaClassName);
+			Constructor<?> thisConstructor = thisClass.getConstructor(argClasses);
 			return new ObjectWrapper(thisConstructor.newInstance(args));
 		} catch (InvocationTargetException e ) {
 			//propagate this to Perl and die a standard message
